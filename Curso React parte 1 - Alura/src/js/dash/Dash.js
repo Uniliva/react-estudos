@@ -1,7 +1,22 @@
 import React, { Component } from 'react';
 
 class Dash extends Component {
-  render() {
+  //usado pra inicializar o sobjetos
+  constructor(){
+    console.log('construtor')
+    super() //para usar o this a seguir é necessario acionar o super
+    this.state = { autores:[] } //adicionando ao status a lista de objetos
+    
+  }
+  componentWillMount(){
+    console.log('componentWillMount')
+    //aqui seria feita uma consulta ajax
+    this.setState({autores:[{nome:'Uniiliva',email:'uniliva@hotmail.com'}]})
+  }
+
+  //responsavel por renderizar os item na tela, deve ser chamado toda vez que ouver uma alteração no status
+  render() {    
+    console.log('render')
     return (
       <div id="main">
         <div className="header">
@@ -40,11 +55,18 @@ class Dash extends Component {
                   <th>email</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>Alberto</td>
-                  <td>alberto.souza@caelum.com.br</td>
-                </tr>
+              <tbody>                
+                {
+                  //para inserir codigo dinâmico no html use as chaves {} do JSX
+                  this.state.autores.map(autor => (
+                    <tr>                  
+                    <td>{autor.nome}</td>
+                    <td>{autor.email}</td>
+                  </tr>
+                    )
+                )
+                }
+              
               </tbody>
             </table>
           </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import $ from 'jquery'
 import './css/side-menu.css'
 import '../node_modules/purecss/build/pure-min.css'
 import Menu from './js/menu/Menu';
