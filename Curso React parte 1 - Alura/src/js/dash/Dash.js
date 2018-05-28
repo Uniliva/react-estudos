@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
+import * as firebase from 'firebase'
 
 class Dash extends Component {
   //usado pra inicializar o sobjetos
   constructor(){
     console.log('construtor')
     super() //para usar o this a seguir é necessario acionar o super
-    this.state = { autores:[] } //adicionando ao status a lista de objetos
+    this.state = { autores:{} } //adicionando ao status a lista de objetos
     
   }
   componentWillMount(){
     console.log('componentWillMount')
-    //aqui seria feita uma consulta ajax
-    this.setState({autores:[{nome:'Uniiliva',email:'uniliva@hotmail.com'}]})
+    firebase.database().ref('/livraria/autores').once('value').then(function(snapshot) {
+     this.setState({autores:snapshot.val()})     
+    }.bind(this)
+  )
   }
 
   //responsavel por renderizar os item na tela, deve ser chamado toda vez que ouver uma alteração no status
@@ -57,14 +60,14 @@ class Dash extends Component {
               </thead>
               <tbody>                
                 {
-                  //para inserir codigo dinâmico no html use as chaves {} do JSX
-                  this.state.autores.map(autor => (
+                 //para inserir codigo dinâmico no html use as chaves {} do JSX              
+                 this.state['autores'].map(autor => (
                     <tr>                  
                     <td>{autor.nome}</td>
                     <td>{autor.email}</td>
                   </tr>
                     )
-                )
+                )             
                 }
               
               </tbody>
