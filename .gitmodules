@@ -1,0 +1,3 @@
+[submodule "projeto-do-professor"]
+	path = projeto-do-professor
+	url = https://github.com/francisnei/reactedp2.git
