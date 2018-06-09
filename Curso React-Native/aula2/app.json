@@ -1,4 +1,5 @@
 {
-  "name": "aula2",
-  "displayName": "aula2"
+  "expo": {
+    "sdkVersion": "27.0.0"
+  }
 }

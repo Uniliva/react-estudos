@@ -1,34 +1,37 @@
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
-import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-import {  } from 'react-native-elements';
+const margem = {
+  padding: 10,
+  marginTop: 10,
+};
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+// STATELESS FUNCTION
+const MeuComponente = (props) => <Text>{props.text}</Text>;
 
-type Props = {};
-export default class App extends Component<Props> {
+const outroRender = <Text>NOVO ITEM</Text>;
+
+export default class App extends React.Component {
+  renderItems(lista) {
+    return lista.map((element, index) => (
+      <Text key={`${index}`} style={styles.titulo}>
+        {element}
+      </Text>
+    ));
+  }
+
   render() {
+    const lista = ['item 1', 'item 2', 'item3'];
+
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+        {this.renderItems(lista)}
+        <View style={[styles.containe2, styles.containe3]}>
+          <Text style={{ flexDirection: 'center' }}>1</Text>
+        </View>
+        <View style={styles.containe3}>
+          <Text>1</Text>
+        </View>
       </View>
     );
   }
@@ -37,18 +40,24 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#fff',
+    // alignItems: 'center',
+    justifyContent: 'flex-end',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  containe2: {
+    flex: 2,
+    backgroundColor: 'red',
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  containe3: {
+    flex: 5,
+    backgroundColor: 'green',
+  },
+  titulo: {
+    ...margem,
+    fontSize: 40,
+    backgroundColor: '#ccc',
+  },
+  subtitulo: {
+    backgroundColor: 'red',
   },
 });
